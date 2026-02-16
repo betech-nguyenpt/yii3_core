@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: yii3_web
     build:
       dockerfile: docker/Dockerfile
       context: ..
@@ -19,4 +20,25 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     tty: true
+  db:
+    container_name: yii3_mysql
+    image: mysql:latest
+    command: --sort_buffer_size=512K
+    restart: unless-stopped
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    env_file:
+      - ./dev/.mysql
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
 
+  phpmyadmin:
+    container_name: yii3_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - '8887:80'
+    environment:
+        # - PMA_ARBITRARY=1
+        - PMA_HOST=yii3_mysql
+    depends_on:
+        - db
