@@ -12,5 +12,8 @@ return [
             Route::get('/')
                 ->action(Web\HomePage\Action::class)
                 ->name('home'),
+            Route::get('/login')
+                ->action(Web\Login\Action::class)
+                ->name('login'),
         ),
 ];

@@ -23,4 +23,8 @@ $this->setTitle($applicationParams->name);
             <i>Don't forget to check the guide.</i>
         </a>
     </p>
+
+    <p>
+        <a href="/login" class="btn btn-primary">Login</a>
+    </p>
 </div>
