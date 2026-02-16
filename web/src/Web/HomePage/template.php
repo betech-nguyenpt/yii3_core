@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 use App\Shared\ApplicationParams;
 use Yiisoft\View\WebView;
+use Yiisoft\User\CurrentUser;
 
 /**
  * @var WebView $this
  * @var ApplicationParams $applicationParams
+ * @var CurrentUser $currentUser
  */
 
 $this->setTitle($applicationParams->name);
@@ -16,7 +18,11 @@ $this->setTitle($applicationParams->name);
 <div class="text-center">
     <h1>Hello!</h1>
 
-    <p>Let's start something great with <strong>Yii3</strong>!</p>
+    <?php if ($currentUser->isGuest()): ?>
+        <p>Let's start something great with <strong>Yii3</strong>!</p>
+    <?php else: ?>
+        <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong>!</p>
+    <?php endif; ?>
 
     <p>
         <a href="https://github.com/yiisoft/docs/tree/master/guide/en" target="_blank" rel="noopener">
@@ -25,6 +31,10 @@ $this->setTitle($applicationParams->name);
     </p>
 
     <p>
-        <a href="/login" class="btn btn-primary">Login</a>
+        <?php if ($currentUser->isGuest()): ?>
+            <a href="/login" class="btn btn-primary">Login</a>
+        <?php else: ?>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
+        <?php endif; ?>
     </p>
 </div>

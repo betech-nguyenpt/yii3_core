@@ -15,5 +15,11 @@ return [
             Route::get('/login')
                 ->action(Web\Login\Action::class)
                 ->name('login'),
+            Route::post('/login')
+                ->action(Web\Login\Action::class)
+                ->name('login.post'),
+            Route::get('/logout')
+                ->action(Web\Logout\Action::class)
+                ->name('logout'),
         ),
 ];
