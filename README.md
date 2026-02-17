@@ -10,7 +10,10 @@ make build && make down && make up
 make composer require yiisoft/db-mysql
 
 make composer require yiisoft/db-migration
-make yii migrate:create page
 
 make composer require yiisoft/user
+# Migrate
+make yii migrate:create page
+# Seeder
+make yii seeder:admin-users
 ```
