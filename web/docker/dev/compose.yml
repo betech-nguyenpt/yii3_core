@@ -6,8 +6,8 @@ services:
       context: ..
       target: dev
       args:
-        USER_ID: ${UID}
-        GROUP_ID: ${GID}
+        USER_ID: ${UID:-10001}
+        GROUP_ID: ${GID:-10001}
     env_file:
       - path: ./dev/.env
       - path: ./dev/override.env
