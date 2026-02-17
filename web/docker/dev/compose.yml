@@ -19,6 +19,9 @@ services:
       - ../runtime:/app/runtime
       - caddy_data:/data
       - caddy_config:/config
+    depends_on:
+      db:
+        condition: service_healthy
     tty: true
   db:
     container_name: yii3_mysql
@@ -31,6 +34,10 @@ services:
       - ./dev/.mysql
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
 
   phpmyadmin:
     container_name: yii3_phpmyadmin
