@@ -9,34 +9,19 @@ use Yiisoft\Auth\IdentityRepositoryInterface;
 
 final readonly class IdentityRepository implements IdentityRepositoryInterface
 {
-    /**
-     * Simple user database for demo purposes.
-     * In production, this should be replaced with a real database.
-     *
-     * @var array
-     */
-    private const USERS = [
-        [
-            'id' => '1',
-            'username' => 'admin',
-            'password' => 'admin123',
-        ],
-        [
-            'id' => '2',
-            'username' => 'user',
-            'password' => 'user123',
-        ],
-    ];
+    public function __construct(
+        private AdminUserRepository $adminUserRepository,
+    ) {}
 
     public function findIdentity(string $id): ?IdentityInterface
     {
-        foreach (self::USERS as $user) {
-            if ((string)$user['id'] === $id) {
-                return new Identity($id, $user['username']);
-            }
+        $adminUser = $this->adminUserRepository->findOneById((int) $id);
+
+        if ($adminUser === null) {
+            return null;
         }
 
-        return null;
+        return Identity::fromAdminUser($adminUser);
     }
 
     public function findIdentityByToken(string $token, string $type): ?IdentityInterface
@@ -50,12 +35,22 @@ final readonly class IdentityRepository implements IdentityRepositoryInterface
      */
     public function findByUsernameAndPassword(string $username, string $password): ?IdentityInterface
     {
-        foreach (self::USERS as $user) {
-            if ($user['username'] === $username && $user['password'] === $password) {
-                return new Identity($user['id'], $user['username']);
-            }
+        $adminUser = $this->adminUserRepository->findOneByUsername($username);
+
+        if ($adminUser === null) {
+            return null;
         }
 
-        return null;
+        // Verify the password using bcrypt
+        if (!password_verify($password, $adminUser->password)) {
+            return null;
+        }
+
+        // Check if user is active
+        if (!$adminUser->isActive()) {
+            return null;
+        }
+
+        return Identity::fromAdminUser($adminUser);
     }
 }

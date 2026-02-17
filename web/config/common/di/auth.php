@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\User\AdminUserRepository;
 use App\User\Identity;
 use App\User\IdentityRepository;
 use Yiisoft\Auth\IdentityRepositoryInterface;
@@ -20,7 +21,18 @@ return [
             null,
         ],
     ],
-    IdentityRepositoryInterface::class => IdentityRepository::class,
+    AdminUserRepository::class => [
+        'class' => AdminUserRepository::class,
+        '__construct()' => [
+            'connection' => Reference::to('Yiisoft\Db\Connection\ConnectionInterface'),
+        ],
+    ],
+    IdentityRepositoryInterface::class => [
+        'class' => IdentityRepository::class,
+        '__construct()' => [
+            'adminUserRepository' => Reference::to(AdminUserRepository::class),
+        ],
+    ],
     AuthenticationMethodInterface::class => WebAuth::class,
     CurrentUser::class => [
         'withSession()' => [Reference::to(SessionInterface::class)]
