@@ -12,6 +12,9 @@ final class AdminUsersSeeder
 
     public function run(): void
     {
+        // Truncate the table first
+        $this->db->createCommand()->truncateTable('{{%admin_users}}')->execute();
+
         $adminUsers = [
             [
                 'username' => 'sadmin',
@@ -49,7 +52,7 @@ final class AdminUsersSeeder
                 'fullname' => 'Support Staff',
                 'phone' => '+84898765432',
                 'password' => password_hash('Support@1234', PASSWORD_BCRYPT),
-                'role_id' => 3,
+                'role_id' => 20,
                 'status' => 1,
                 'created_by' => 1,
             ],
