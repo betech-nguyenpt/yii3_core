@@ -17,26 +17,31 @@ final class AdminRolesSeeder
 
         $roles = [
             [
+                'id'    => 1,
                 'name' => 'Super Administrator',
                 'code' => 'super_admin',
                 'weight' => 1,
             ],
             [
+                'id'    => 2,
                 'name' => 'Administrator',
                 'code' => 'admin',
                 'weight' => 2,
             ],
             [
+                'id'    => 3,
                 'name' => 'Manager',
                 'code' => 'manager',
                 'weight' => 10,
             ],
             [
+                'id'    => 4,
                 'name' => 'Support Staff',
                 'code' => 'support',
                 'weight' => 20,
             ],
             [
+                'id'    => 5,
                 'name' => 'User',
                 'code' => 'user',
                 'weight' => 30,

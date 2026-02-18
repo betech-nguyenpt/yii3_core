@@ -21,7 +21,7 @@ $this->setTitle($applicationParams->name);
     <?php if ($currentUser->isGuest()): ?>
         <p>Let's start something great with <strong>Yii3</strong>!</p>
     <?php else: ?>
-        <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong>!</p>
+        <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
     <?php endif; ?>
 
     <p>

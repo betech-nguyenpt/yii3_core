@@ -52,7 +52,7 @@ final class AdminUsersSeeder
                 'fullname' => 'Support Staff',
                 'phone' => '+84898765432',
                 'password' => password_hash('Support@1234', PASSWORD_BCRYPT),
-                'role_id' => 20,
+                'role_id' => 4,
                 'status' => 1,
                 'created_by' => 1,
             ],

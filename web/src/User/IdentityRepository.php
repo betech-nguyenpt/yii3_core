@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User;
 
+use App\Admin\AdminRoleRepository;
 use Yiisoft\Auth\IdentityInterface;
 use Yiisoft\Auth\IdentityRepositoryInterface;
 
@@ -11,6 +12,7 @@ final readonly class IdentityRepository implements IdentityRepositoryInterface
 {
     public function __construct(
         private AdminUserRepository $adminUserRepository,
+        private AdminRoleRepository $adminRoleRepository,
     ) {}
 
     public function findIdentity(string $id): ?IdentityInterface
@@ -21,7 +23,8 @@ final readonly class IdentityRepository implements IdentityRepositoryInterface
             return null;
         }
 
-        return Identity::fromAdminUser($adminUser);
+        $roleName = $this->getRoleName($adminUser->roleId);
+        return Identity::fromAdminUser($adminUser, $roleName);
     }
 
     public function findIdentityByToken(string $token, string $type): ?IdentityInterface
@@ -50,7 +53,13 @@ final readonly class IdentityRepository implements IdentityRepositoryInterface
         if (!$adminUser->isActive()) {
             return null;
         }
+        $roleName = $this->getRoleName($adminUser->roleId);
+        return Identity::fromAdminUser($adminUser, $roleName);
+    }
 
-        return Identity::fromAdminUser($adminUser);
+    private function getRoleName(int $roleId): string
+    {
+        $role = $this->adminRoleRepository->findOneById($roleId);
+        return $role?->name ?? '';
     }
 }

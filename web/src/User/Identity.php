@@ -16,9 +16,10 @@ final readonly class Identity implements IdentityInterface
         private string $phone = '',
         private int $roleId = 0,
         private int $status = 1,
+        private string $roleName = '',
     ) {}
 
-    public static function fromAdminUser(AdminUser $user): self
+    public static function fromAdminUser(AdminUser $user, string $roleName = ''): self
     {
         return new self(
             id: (string) $user->id,
@@ -28,6 +29,7 @@ final readonly class Identity implements IdentityInterface
             phone: $user->phone,
             roleId: $user->roleId,
             status: $user->status,
+            roleName: $roleName,
         );
     }
 
@@ -69,5 +71,10 @@ final readonly class Identity implements IdentityInterface
     public function isActive(): bool
     {
         return $this->status === 1;
+    }
+
+    public function getRoleName(): string
+    {
+        return $this->roleName;
     }
 }
