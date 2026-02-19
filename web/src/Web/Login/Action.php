@@ -23,6 +23,13 @@ final readonly class Action
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
+        // If user is already logged in, redirect to home
+        if (!$this->currentUser->isGuest()) {
+            return $this->responseFactory
+                ->createResponse(Status::FOUND)
+                ->withHeader('Location', '/');
+        }
+
         $method = $request->getMethod();
 
         if ($method === 'POST') {

@@ -14,6 +14,7 @@ use Yiisoft\Html\Html;
  * @var Yiisoft\View\WebView $this
  * @var Yiisoft\Router\CurrentRoute $currentRoute
  * @var Yiisoft\Router\UrlGeneratorInterface $urlGenerator
+ * @var Yiisoft\User\CurrentUser $currentUser
  * @var \App\Web\Shared\MenuProvider $menuProvider
  */
 

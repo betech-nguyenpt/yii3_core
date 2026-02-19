@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Html\Html;
+use Yiisoft\User\CurrentUser;
 
 /**
  * @var UrlGeneratorInterface $urlGenerator
+ * @var CurrentUser $currentUser
  * @var array $menu
  */
 
@@ -45,5 +47,14 @@ if (empty($menu)) {
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
+        <?php if ($currentUser->isGuest()): ?>
+            <li class="sticky-menu__item">
+                <a href="/login" class="sticky-menu__link">Login</a>
+            </li>
+        <?php else: ?>
+            <li class="sticky-menu__item">
+                <a href="/logout" class="sticky-menu__link">Logout</a>
+            </li>
+        <?php endif; ?>
     </ul>
 </nav>

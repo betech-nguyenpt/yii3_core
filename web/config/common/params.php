@@ -10,6 +10,7 @@ use Yiisoft\Db\Mysql\Dsn;
 use Yiisoft\Definitions\Reference;
 use Yiisoft\Router\CurrentRoute;
 use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\User\CurrentUser;
 use Yiisoft\Yii\View\Renderer\CsrfViewInjection;
 
 return [
@@ -27,6 +28,7 @@ return [
             'aliases' => Reference::to(Aliases::class),
             'urlGenerator' => Reference::to(UrlGeneratorInterface::class),
             'currentRoute' => Reference::to(CurrentRoute::class),
+            'currentUser' => Reference::to(CurrentUser::class),
             'menuProvider' => Reference::to(MenuProvider::class),
         ],
     ],
@@ -55,10 +57,6 @@ return [
             'home'      => [    // Home menu item
                 'alias' => 'Home',
                 'url'   => 'home',
-            ],
-            'login'     => [    // Login menu item
-                'alias' => 'Login',
-                'url'   => 'login',
             ],
             // TODO: Add the following routes when they are implemented:
             // 'admin'     => [    // Admin module dropdown
