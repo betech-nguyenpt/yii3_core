@@ -58,20 +58,19 @@ return [
                 'alias' => 'Home',
                 'url'   => 'home',
             ],
-            // TODO: Add the following routes when they are implemented:
-            // 'admin'     => [    // Admin module dropdown
-            //     'alias' => 'Admin Module',
-            //     'children'  => [
-            //         'user'  => [    // User menu item
-            //             'alias' => 'User',
-            //             'url'   => 'admin/admin-user/index',
-            //         ],
-            //         'role'  => [    // Role menu item
-            //             'alias' => 'Role',
-            //             'url'   => 'admin/admin-role/index',
-            //         ],
-            //     ],
-            // ],
+            'admin'     => [    // Admin module dropdown
+                'alias' => 'Admin',
+                'children'  => [
+                    'user'  => [    // User menu item
+                        'alias' => 'User',
+                        'url'   => 'admin.admin-user.index',
+                    ],
+                    // 'role'  => [    // Role menu item
+                    //     'alias' => 'Role',
+                    //     'url'   => 'admin/admin-role/index',
+                    // ],
+                ],
+            ],
             // 'api'       => [    // Api module dropdown
             //     'alias' => 'Api Module',
             //     'children'  => [

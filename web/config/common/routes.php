@@ -21,5 +21,8 @@ return [
             Route::get('/logout')
                 ->action(Web\Logout\Action::class)
                 ->name('logout'),
+            Route::get('/admin/admin-user/index')
+                ->action(Web\Admin\AdminUser\Action::class)
+                ->name('admin.admin-user.index'),
         ),
 ];

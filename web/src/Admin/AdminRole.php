@@ -6,6 +6,7 @@ namespace App\Admin;
 
 final readonly class AdminRole
 {
+    public const SUPER_ADMIN_ROLE_ID = '1';
     private function __construct(
         public int $id,
         public string $name,
