@@ -24,5 +24,8 @@ return [
             Route::get('/admin/admin-user/index')
                 ->action(Web\Admin\AdminUser\Action::class)
                 ->name('admin.admin-user.index'),
+            Route::get('/admin/admin-role/index')
+                ->action(Web\Admin\AdminRole\Action::class)
+                ->name('admin.admin-role.index'),
         ),
 ];

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Web\Admin\AdminUser;
+namespace App\Web\Admin\AdminRole;
 
 use App\Admin\AdminRole;
+use App\Admin\AdminRoleRepository;
 use App\Web\Admin\BaseAction;
-use App\User\AdminUserRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Yiisoft\User\CurrentUser;
@@ -18,25 +18,25 @@ final readonly class Action extends BaseAction
         ViewRenderer $viewRenderer,
         CurrentUser $currentUser,
         ResponseFactoryInterface $responseFactory,
-        private AdminUserRepository $adminUserRepository,
+        private AdminRoleRepository $adminRoleRepository,
     ) {
         parent::__construct($viewRenderer, $currentUser, $responseFactory);
     }
 
     protected function renderPage(): ResponseInterface
     {
-        $allUsers = $this->adminUserRepository->findAll();
+        $allRoles = $this->adminRoleRepository->findAll();
         
-        // Filter out superadmin users (role_id = 1)
-        $users = [];
-        foreach ($allUsers as $user) {
-            if ($user->roleId != AdminRole::SUPER_ADMIN_ROLE_ID) {
-                $users[] = $user;
+        // Filter out superadmin role (id = 1)
+        $roles = [];
+        foreach ($allRoles as $role) {
+            if ($role->id != AdminRole::SUPER_ADMIN_ROLE_ID) {
+                $roles[] = $role;
             }
         }
 
         return $this->viewRenderer->render(__DIR__ . '/index', [
-            'users' => $users,
+            'roles' => $roles,
         ]);
     }
 }

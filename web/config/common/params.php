@@ -65,10 +65,10 @@ return [
                         'alias' => 'User',
                         'url'   => 'admin.admin-user.index',
                     ],
-                    // 'role'  => [    // Role menu item
-                    //     'alias' => 'Role',
-                    //     'url'   => 'admin/admin-role/index',
-                    // ],
+                    'role'  => [    // Role menu item
+                        'alias' => 'Role',
+                        'url'   => 'admin.admin-role.index',
+                    ],
                 ],
             ],
             // 'api'       => [    // Api module dropdown

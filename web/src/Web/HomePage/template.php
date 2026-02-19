@@ -29,6 +29,9 @@ $this->setTitle($applicationParams->name);
             <i>Don't forget to check the guide.</i>
         </a>
     </p>
+    <?php if ($currentUser->isGuest()): ?>
+        <p>Let's start something great with <strong>Yii3</strong>!</p>
+    <?php else: ?>
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
@@ -87,5 +90,5 @@ $this->setTitle($applicationParams->name);
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
         <p>Welcome back, <strong><?= htmlspecialchars($currentUser->getIdentity()->getUsername()) ?></strong><?php if ($currentUser->getIdentity()->getRoleName()): ?> (<?= htmlspecialchars($currentUser->getIdentity()->getRoleName()) ?>)<?php endif; ?>!</p>
-
+    <?php endif; ?>
 </div>
