@@ -14,6 +14,7 @@ use Yiisoft\Html\Html;
  * @var Yiisoft\View\WebView $this
  * @var Yiisoft\Router\CurrentRoute $currentRoute
  * @var Yiisoft\Router\UrlGeneratorInterface $urlGenerator
+ * @var \App\Web\Shared\MenuProvider $menuProvider
  */
 
 $assetManager->register(MainAsset::class);
@@ -37,6 +38,15 @@ $this->beginPage()
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<?php
+// Render sticky menu if menu data is available
+$menu = $menuProvider->getMenu();
+if (!empty($menu)) {
+    $menuData = $menu;
+    include __DIR__ . '/_menu.php';
+}
+?>
 
 <div class="header">
     <a href="https://www.yiiframework.com/" target="_blank" rel="noopener">

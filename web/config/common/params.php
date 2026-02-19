@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Shared\ApplicationParams;
+use App\Web\Shared\MenuProvider;
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Db\Mysql\Dsn;
@@ -26,6 +27,7 @@ return [
             'aliases' => Reference::to(Aliases::class),
             'urlGenerator' => Reference::to(UrlGeneratorInterface::class),
             'currentRoute' => Reference::to(CurrentRoute::class),
+            'menuProvider' => Reference::to(MenuProvider::class),
         ],
     ],
 
@@ -46,5 +48,45 @@ return [
     'yiisoft/db-migration' => [
         'newMigrationNamespace' => 'App\\Migration',
         'sourceNamespaces'      => ['App\\Migration'],
+    ],
+    'system/menu' => [
+        // Menu for current Home page
+        'back_menu' => [
+            'home'      => [    // Home menu item
+                'alias' => 'Home',
+                'url'   => 'home',
+            ],
+            'login'     => [    // Login menu item
+                'alias' => 'Login',
+                'url'   => 'login',
+            ],
+            // TODO: Add the following routes when they are implemented:
+            // 'admin'     => [    // Admin module dropdown
+            //     'alias' => 'Admin Module',
+            //     'children'  => [
+            //         'user'  => [    // User menu item
+            //             'alias' => 'User',
+            //             'url'   => 'admin/admin-user/index',
+            //         ],
+            //         'role'  => [    // Role menu item
+            //             'alias' => 'Role',
+            //             'url'   => 'admin/admin-role/index',
+            //         ],
+            //     ],
+            // ],
+            // 'api'       => [    // Api module dropdown
+            //     'alias' => 'Api Module',
+            //     'children'  => [
+            //         'api-request-log'   => [    // Request log menu item
+            //             'alias' => 'Request log',
+            //             'url'   => 'api/api-request-log/index',
+            //         ],
+            //     ],
+            // ],
+            // 'setting'   => [    // Setting menu item
+            //     'alias' => 'Setting',
+            //     'url'   => 'admin/admin-setting/index',
+            // ],
+        ],
     ],
 ];
