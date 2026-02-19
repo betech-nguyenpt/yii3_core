@@ -6,6 +6,7 @@ namespace App\Console;
 
 use App\Seeder\AdminRolesSeeder;
 use App\Seeder\AdminUsersSeeder;
+use App\Seeder\AdminRolePermissionsSeeder;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,6 +39,13 @@ final class SeederCommand extends Command
             $usersSeeder = new AdminUsersSeeder($this->db);
             $usersSeeder->run();
             $output->writeln('<info>✓ Admin users seeded successfully!</info>');
+            $output->writeln('');
+
+            // Finally seed role permissions
+            $output->writeln('<comment>Seeding admin_role_permissions table...</comment>');
+            $permissionsSeeder = new AdminRolePermissionsSeeder($this->db);
+            $permissionsSeeder->run();
+            $output->writeln('<info>✓ Admin role permissions seeded successfully!</info>');
             $output->writeln('');
 
             $output->writeln('<info>All seeders completed successfully!</info>');

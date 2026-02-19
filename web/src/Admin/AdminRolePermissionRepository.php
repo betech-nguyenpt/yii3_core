@@ -82,7 +82,7 @@ final readonly class AdminRolePermissionRepository
             ->all();
 
         foreach ($data as $row) {
-            $retVal[$row['module']][$row['controller']] = implode(';', $row['actions']);
+            $retVal[$row['module']][$row['controller']] = explode(';', $row['actions']);
         }
         return $retVal;
     }
