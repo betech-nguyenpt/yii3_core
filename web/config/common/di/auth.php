@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Admin\AdminRolePermissionRepository;
+use App\Admin\AdminRoleRepository;
 use App\User\AdminUserRepository;
 use App\User\Identity;
 use App\User\IdentityRepository;
@@ -31,6 +33,8 @@ return [
         'class' => IdentityRepository::class,
         '__construct()' => [
             'adminUserRepository' => Reference::to(AdminUserRepository::class),
+            'adminRoleRepository' => Reference::to(AdminRoleRepository::class),
+            'adminRolePermissionRepository' => Reference::to(AdminRolePermissionRepository::class),
         ],
     ],
     AuthenticationMethodInterface::class => WebAuth::class,

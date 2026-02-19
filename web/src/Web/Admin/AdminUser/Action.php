@@ -9,6 +9,7 @@ use App\Web\Admin\BaseAction;
 use App\User\AdminUserRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Yiisoft\Router\CurrentRoute;
 use Yiisoft\User\CurrentUser;
 use Yiisoft\Yii\View\Renderer\ViewRenderer;
 
@@ -18,9 +19,9 @@ final readonly class Action extends BaseAction
         ViewRenderer $viewRenderer,
         CurrentUser $currentUser,
         ResponseFactoryInterface $responseFactory,
-        private AdminUserRepository $adminUserRepository,
+        private AdminUserRepository $adminUserRepository, CurrentRoute $currentRoute
     ) {
-        parent::__construct($viewRenderer, $currentUser, $responseFactory);
+        parent::__construct($viewRenderer, $currentUser, $responseFactory, $currentRoute);
     }
 
     protected function renderPage(): ResponseInterface

@@ -46,7 +46,7 @@ final readonly class AdminRolePermission
     /**
      * Check if a specific action is allowed
      */
-    public function hasAction(string $action): bool
+    public function canAccess(string $action): bool
     {
         return in_array($action, $this->getActionsList(), true);
     }

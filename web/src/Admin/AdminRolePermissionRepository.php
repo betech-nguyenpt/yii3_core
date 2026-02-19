@@ -72,6 +72,21 @@ final readonly class AdminRolePermissionRepository
         }
     }
 
+    public function findPermissionsByRoleId(int $roleId): array
+    {
+        $retVal = [];
+        $data = $this->connection
+            ->createQuery()
+            ->from('{{%admin_role_permissions}}')
+            ->where(['role_id' => $roleId])
+            ->all();
+
+        foreach ($data as $row) {
+            $retVal[$row['module']][$row['controller']] = implode(';', $row['actions']);
+        }
+        return $retVal;
+    }
+
     /**
      * Find all permissions for a specific module
      * 
